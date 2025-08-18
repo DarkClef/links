@@ -152,9 +152,8 @@
         // Twitch API entegrasyonu
          async function checkTwitch() {
              try {
-                 // Twitch API için kendi Client-ID ve Access Token'ınızı kullanın
-                 const CLIENT_ID = 'YOUR_TWITCH_CLIENT_ID';
-                 const ACCESS_TOKEN = 'YOUR_TWITCH_ACCESS_TOKEN';
+                 const CLIENT_ID = '12q4puiy1xusxgv74kgnfa64fzlyr4';
+                 const ACCESS_TOKEN = '2r895b00mg4yuj78imqbv3jps9hhg7';
                  
                  const res = await fetch("https://api.twitch.tv/helix/streams?user_login=darkclef", {
                      headers: {
@@ -178,7 +177,6 @@
              }
          }
 
-        // Kick API entegrasyonu (resmi API yok, public endpoint kullanılabilir)
         async function checkKick() {
             try {
                 const res = await fetch("https://kick.com/api/v2/channels/darkclef");
@@ -199,9 +197,8 @@
         // YouTube son video
          async function loadYoutube() {
              try {
-                 // YouTube API için kendi API Key'inizi kullanın
-                 const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
-                 const CHANNEL_ID = 'UC0kzvEoHvKoW_K1s5wH1ibw'; // Kendi kanal ID'nizi buraya yazın
+                 const YOUTUBE_API_KEY = 'AIzaSyAiU3Y9AiHyPxQR8Lwy0F35MXULtiEGPGY';
+                 const CHANNEL_ID = 'UC0kzvEoHvKoW_K1s5wH1ibw'; 
                  
                  const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`);
                  const data = await res.json();
@@ -221,4 +218,5 @@
         loadYoutube();
     </script>
 </body>
+
 </html>
