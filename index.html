@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkClef | Links</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #f1f1f1;
+            text-align: center;
+        }
+        header {
+            background: url('banner.svg') no-repeat center/cover;
+            padding: 60px 20px;
+        }
+        header img {
+            width: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        section {
+            margin: 30px auto;
+            max-width: 700px;
+        }
+        h2 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .link-btn {
+            background: #1c1c1c;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+            min-width: 200px;
+            justify-content: center;
+        }
+        .link-btn:hover {
+            background: #333;
+        }
+        .status {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: red;
+            color: white;
+        }
+        .status.live {
+            background: green;
+        }
+        .yt-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .yt-thumb {
+            background: #1c1c1c;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+        }
+        .yt-thumb img {
+            width: 120px;
+            height: 90px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        .video-info {
+            flex: 1;
+            text-align: left;
+        }
+        .video-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #fff;
+            line-height: 1.3;
+        }
+        .video-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.svg" alt="DarkClef Logo">
+        <h1>DarkClef</h1>
+        <p>Welcome to my official links page</p>
+    </header>
+
+    <section>
+        <h2>Social</h2>
+        <div class="links">
+            <a class="link-btn" href="https://www.instagram.com/metecanalacam/" target="_blank">📸 Instagram</a>
+            <a class="link-btn" id="kick-link" href="https://kick.com/darkclef" target="_blank">🎮 Kick <span id="kick-status" class="status">Offline</span></a>
+            <a class="link-btn" id="twitch-link" href="https://www.twitch.tv/darkclef" target="_blank">📺 Twitch <span id="twitch-status" class="status">Offline</span></a>
+            <a class="link-btn" href="https://discord.gg/VRsDseb4Nf" target="_blank">💬 Discord</a>
+            <div class="yt-container">
+                <a class="link-btn" href="https://www.youtube.com/@metecanalacam" target="_blank">▶️ YouTube</a>
+                <div class="yt-thumb" id="yt-thumb">
+                    <img src="" alt="Son Video" id="latestVideoThumbnail">
+                    <div class="video-info">
+                        <h4 id="latestVideoTitle">Son Video Yükleniyor...</h4>
+                        <p id="latestVideoDate"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Software</h2>
+        <div class="links">
+            <a class="link-btn" href="https://dc-scripts-store.tebex.io/" target="_blank">🛒 Tebex</a>
+            <a class="link-btn" href="https://forge.plebmasters.de/creators/DarkClef" target="_blank">🛠️ Plebmaster</a>
+            <a class="link-btn" href="https://forum.cfx.re/u/dc-scripts" target="_blank">🌐 Cfx Forum</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>Music</h2>
+        <div class="links">
+            <a class="link-btn" href="https://open.spotify.com/intl-tr/artist/6tVKHN9SYoWzImOhzy0D3f?si=f3YMqIc1QF2ojKPGBFxQig" target="_blank">🎵 Spotify</a>
+            <a class="link-btn" href="https://music.apple.com/tr/artist/metecan-ala%C3%A7am/1670748124" target="_blank">🍏 Apple Music</a>
+        </div>
+    </section>
+
+    <script>
+        // Twitch API entegrasyonu
+         async function checkTwitch() {
+             try {
+                 // Twitch API için kendi Client-ID ve Access Token'ınızı kullanın
+                 const CLIENT_ID = 'YOUR_TWITCH_CLIENT_ID';
+                 const ACCESS_TOKEN = 'YOUR_TWITCH_ACCESS_TOKEN';
+                 
+                 const res = await fetch("https://api.twitch.tv/helix/streams?user_login=darkclef", {
+                     headers: {
+                         "Client-ID": CLIENT_ID,
+                         "Authorization": `Bearer ${ACCESS_TOKEN}`
+                     }
+                 });
+                 const data = await res.json();
+                 const statusEl = document.getElementById('twitch-status');
+                 if (data.data && data.data.length > 0) {
+                     statusEl.textContent = 'Live';
+                     statusEl.classList.add('live');
+                 } else {
+                     statusEl.textContent = 'Offline';
+                     statusEl.classList.remove('live');
+                 }
+             } catch (e) {
+                 console.log('Twitch API error', e);
+                 // API hatası durumunda offline göster
+                 document.getElementById('twitch-status').textContent = 'Offline';
+             }
+         }
+
+        // Kick API entegrasyonu (resmi API yok, public endpoint kullanılabilir)
+        async function checkKick() {
+            try {
+                const res = await fetch("https://kick.com/api/v2/channels/darkclef");
+                const data = await res.json();
+                const statusEl = document.getElementById('kick-status');
+                if (data.livestream && data.livestream.is_live) {
+                    statusEl.textContent = 'Live';
+                    statusEl.classList.add('live');
+                } else {
+                    statusEl.textContent = 'Offline';
+                    statusEl.classList.remove('live');
+                }
+            } catch (e) {
+                console.log('Kick API error', e);
+            }
+        }
+
+        // YouTube son video
+         async function loadYoutube() {
+             try {
+                 // YouTube API için kendi API Key'inizi kullanın
+                 const YOUTUBE_API_KEY = 'YOUR_YOUTUBE_API_KEY';
+                 const CHANNEL_ID = 'UC0kzvEoHvKoW_K1s5wH1ibw'; // Kendi kanal ID'nizi buraya yazın
+                 
+                 const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=1`);
+                 const data = await res.json();
+                 if (data.items && data.items.length > 0) {
+                     const video = data.items[0];
+                     const videoId = video.id.videoId;
+                     const thumb = video.snippet.thumbnails.high.url;
+                     document.getElementById('yt-thumb').innerHTML = `<a href="https://www.youtube.com/watch?v=${videoId}" target="_blank"><img src="${thumb}" alt="Last Video"></a>`;
+                 }
+             } catch (e) {
+                 console.log('YouTube API error', e);
+             }
+         }
+
+        checkTwitch();
+        checkKick();
+        loadYoutube();
+    </script>
+</body>
+</html>
