@@ -42,24 +42,7 @@ function checkStreamingStatus() {
     }
 }
 
-// YouTube latest video fetch (simulated)
-function fetchLatestYouTubeVideo() {
-    const thumbnail = document.getElementById('latestVideoThumbnail');
-    const title = document.getElementById('latestVideoTitle');
-    const date = document.getElementById('latestVideoDate');
-    
-    // Simulated video data (gerçek uygulamada YouTube API kullanılacak)
-    const videoData = {
-        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg',
-        title: 'Son Yüklenen Video - Müzik Prodüksiyonu',
-        publishedAt: '2 gün önce'
-    };
-    
-    thumbnail.src = videoData.thumbnail;
-    thumbnail.alt = videoData.title;
-    title.textContent = videoData.title;
-    date.textContent = videoData.publishedAt;
-}
+
 
 // Smooth scroll for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -95,7 +78,6 @@ function addLoadingAnimation() {
 document.addEventListener('DOMContentLoaded', () => {
     addLoadingAnimation();
     checkStreamingStatus();
-    fetchLatestYouTubeVideo();
     
     // Check streaming status every 5 minutes
     setInterval(checkStreamingStatus, 5 * 60 * 1000);
