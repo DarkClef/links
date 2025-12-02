@@ -336,35 +336,6 @@
             }
         }
         
-        // Twitch API entegrasyonu
-        async function checkTwitch() {
-            try {
-                // Twitch API için kendi Client-ID ve Access Token'ınızı kullanın
-                const CLIENT_ID = '12q4puiy1xusxgv74kgnfa64fzlyr4';
-                const ACCESS_TOKEN = 'kvnlchavku4kophmfygqtwzrlsdiaq';
-                
-                const res = await fetch("https://api.twitch.tv/helix/streams?user_login=darkclef", {
-                    headers: {
-                        "Client-ID": CLIENT_ID,
-                        "Authorization": `Bearer ${ACCESS_TOKEN}`
-                    }
-                });
-                const data = await res.json();
-                const statusEl = document.getElementById('twitch-status');
-                if (data.data && data.data.length > 0) {
-                    statusEl.textContent = 'Live';
-                    statusEl.classList.add('live');
-                } else {
-                    statusEl.textContent = 'Offline';
-                    statusEl.classList.remove('live');
-                }
-            } catch (e) {
-                console.log('Twitch API error', e);
-                // API hatası durumunda offline göster
-                document.getElementById('twitch-status').textContent = 'Offline';
-            }
-        }
-
         // Kick API entegrasyonu (resmi API yok, public endpoint kullanılabilir)
         async function checkKick() {
             try {
@@ -386,12 +357,12 @@
         // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadTheme();
-            checkTwitch();
             checkKick();
         });
     </script>
 </body>
 </html>
+
 
 
 
