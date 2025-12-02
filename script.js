@@ -33,18 +33,12 @@ function checkStreamingStatus() {
     // Şimdilik rastgele durum simülasyonu yapıyoruz
     
     const kickLive = document.getElementById('kickLive');
-    const twitchLive = document.getElementById('twitchLive');
     
     // Simulated live status (gerçek uygulamada API çağrıları yapılacak)
     const isKickLive = Math.random() > 0.7; // %30 şans
-    const isTwitchLive = Math.random() > 0.8; // %20 şans
     
     if (isKickLive) {
         kickLive.classList.add('active');
-    }
-    
-    if (isTwitchLive) {
-        twitchLive.classList.add('active');
     }
 }
 
